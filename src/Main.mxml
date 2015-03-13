@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-               creationComplete="creationCompleteHandler(event)">
+               creationComplete="creationCompleteHandler(event)"
+               currentState="s1"
+        >
 
     <fx:Style>
         @namespace s "library://ns.adobe.com/flex/spark";
@@ -22,15 +24,22 @@
         <s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
     </s:layout>
 
+    <s:states>
+        <s:State name="s1"/>
+        <s:State name="s2"/>
+    </s:states>
+
 
     <fx:Script><![CDATA[
-        import mx.binding.utils.BindingUtils;
         import mx.events.FlexEvent;
 
-        import spark.components.Alert;
+        import spark.layouts.HorizontalLayout;
+
+        private var v:VerticalLayout = new VerticalLayout();
+        private var h:HorizontalLayout = new HorizontalLayout();
 
         private function button1_clickHandler(event:MouseEvent):void {
-            Alert.show('Hello, world');
+            //Alert.show('Hello, world');
         }
 
         private function creationCompleteHandler(event:FlexEvent):void {
@@ -41,6 +50,12 @@
     <s:Button id="loginButton" click="button1_clickHandler(event)" width="110" height="45"
               label="Say Hello"/>
 
-    <s:TextInput id="t1"/>
-    <s:TextInput id="t2" text="@{t1.text}"/>
+    <s:Button label="当前{currentState=='s1'?'状态1':'状态2'}" click="currentState= currentState=='s1'?'s2':'s1'"/>
+
+    <s:Group layout.s1="{v}" layout.s2="{h}" height="200">
+        <s:TextInput id="t1" prompt="文本框1"/>
+        <s:TextInput id="t2" prompt="文本框2" text="@{t1.text}"/>
+    </s:Group>
+
+
 </s:Application>
