@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-        >
+               creationComplete="creationCompleteHandler(event)">
 
     <fx:Style>
         @namespace s "library://ns.adobe.com/flex/spark";
@@ -12,6 +12,10 @@
         s|Button {
             skinClass: ClassReference("flatspark.skins.ButtonSkin");
         }
+
+        #loginButton {
+            /*skinClass: ClassReference("flatspark.skins.ButtonSkin");*/
+        }
     </fx:Style>
     <fx:Style source="assets/style.css"/>
     <s:layout>
@@ -20,12 +24,23 @@
 
 
     <fx:Script><![CDATA[
+        import mx.binding.utils.BindingUtils;
+        import mx.events.FlexEvent;
+
         import spark.components.Alert;
 
         private function button1_clickHandler(event:MouseEvent):void {
             Alert.show('Hello, world');
         }
+
+        private function creationCompleteHandler(event:FlexEvent):void {
+            //BindingUtils.bindProperty(t2, 'text', t1, 'text');
+            //BindingUtils.bindProperty(t1, 'text', t2, 'text');
+        }
         ]]></fx:Script>
-    <s:Button click="button1_clickHandler(event)" width="110" height="45"
+    <s:Button id="loginButton" click="button1_clickHandler(event)" width="110" height="45"
               label="Say Hello"/>
+
+    <s:TextInput id="t1"/>
+    <s:TextInput id="t2" text="@{t1.text}"/>
 </s:Application>
