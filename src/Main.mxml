@@ -1,7 +1,31 @@
 <?xml version="1.0"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+        >
+
+    <fx:Style>
+        @namespace s "library://ns.adobe.com/flex/spark";
+
+        global {
+            fontSize: 20;
+        }
+
+        s|Button {
+            skinClass: ClassReference("flatspark.skins.ButtonSkin");
+        }
+    </fx:Style>
+    <fx:Style source="assets/style.css"/>
+    <s:layout>
+        <s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+    </s:layout>
+
+
     <fx:Script><![CDATA[
-        import mx.controls.Alert;
+        import spark.components.Alert;
+
+        private function button1_clickHandler(event:MouseEvent):void {
+            Alert.show('Hello, world');
+        }
         ]]></fx:Script>
-    <s:Button click="Alert.show('Hello, world')" label="Say Hello"/>
+    <s:Button click="button1_clickHandler(event)" width="110" height="45"
+              label="Say Hello"/>
 </s:Application>
